@@ -1,0 +1,5 @@
+{
+  "name": "The Zetech AI Tribunal",
+  "description": "A cyberpunk-themed terminal for judging poetry submissions using Google Gemini.",
+  "requestFramePermissions": []
+}
