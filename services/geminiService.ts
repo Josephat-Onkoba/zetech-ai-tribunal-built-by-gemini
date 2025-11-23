@@ -1,13 +1,9 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { Submission, RankedResult } from "../types";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  console.error("API_KEY environment variable is missing.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY || '' });
+// Fix: Use process.env.API_KEY exclusively as per guidelines. 
+// Removed import.meta.env check as process.env.API_KEY is assumed to be available.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const responseSchema: Schema = {
   type: Type.ARRAY,
@@ -27,10 +23,6 @@ const responseSchema: Schema = {
 };
 
 export const executeJudgment = async (submissions: Submission[]): Promise<RankedResult[]> => {
-  if (!API_KEY) {
-    throw new Error("API Key is missing. Judgment cannot be executed.");
-  }
-
   const model = "gemini-2.5-flash";
   const systemInstruction = `
     You are a strict, technical, but secretly funny AI Judge presiding over the "Zetech AI Tribunal". 

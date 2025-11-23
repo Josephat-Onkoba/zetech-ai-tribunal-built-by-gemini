@@ -131,7 +131,8 @@ const App: React.FC = () => {
 
         <main>
           {status !== AppStatus.PROCESSING && status !== AppStatus.COMPLETED && (
-             <InputConsole onIngest={handleIngest} disabled={status === AppStatus.PROCESSING} />
+             // Fix: status cannot be PROCESSING here due to the check above, avoiding type overlap error.
+             <InputConsole onIngest={handleIngest} disabled={false} />
           )}
          
           <SystemLogs 
